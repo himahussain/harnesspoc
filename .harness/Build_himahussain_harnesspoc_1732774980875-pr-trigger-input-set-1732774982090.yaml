@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_himahussain_harnesspoc_1732774980875-pr-trigger-input-set
+  identifier: Build_himahussain_harnesspoc_1732774980875prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: HarnessPOC
+  pipeline:
+    identifier: Build_himahussain_harnesspoc_1732774980875
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
