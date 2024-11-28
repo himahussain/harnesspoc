@@ -78,6 +78,38 @@ pipeline:
                     shell: Sh
                     command: touch new_file_created_by_POC.yaml
         tags: {}
+    - stage:
+        name: Deployment
+        identifier: Deployment
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Action
+                  name: Application Deployment
+                  identifier: Application_Deployment
+                  spec:
+                    uses: https://github.com/himahussain/harnesspoc/
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - Timeout
+                        action:
+                          type: ManualIntervention
+                          spec:
+                            timeout: 5s
+                            onTimeout:
+                              action:
+                                type: MarkAsFailure
   properties:
     ci:
       codebase:
