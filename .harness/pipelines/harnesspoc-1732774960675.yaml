@@ -41,24 +41,31 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Action
-                  name: Application Deployment
-                  identifier: Application_Deployment
+                  type: Run
+                  name: Deploy application
+                  identifier: Deploy_application
                   spec:
-                    uses: himahussain/harnesspoc@main
-                    with:
-                      with: python-app.yml
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - Timeout
-                        action:
-                          type: ManualIntervention
-                          spec:
-                            timeout: 5s
-                            onTimeout:
-                              action:
-                                type: MarkAsFailure
+                    shell: Sh
+                    command: |-
+                      #!/bin/bash
+
+                      # Variables
+                      GITHUB_TOKEN="${secrets.getValue('pocrepoaccess')}"
+                      OWNER="himahussain"
+                      REPO="harnesspoc"
+                      WORKFLOW_FILE="python-app.yml" # Replace with your actual workflow file name
+                      REF="main" # Replace with the branch or tag you want to trigger
+
+                      # GitHub API URL to trigger the workflow_dispatch event
+                      API_URL="https://api.github.com/repos/$OWNER/$REPO/actions/workflows/$WORKFLOW_FILE/dispatches"
+
+                      # JSON payload to specify the ref (branch or tag)
+                      PAYLOAD="{\"ref\":\"$REF\"}"
+
+                      # Make the API request to trigger the workflow
+                      curl -X POST $API_URL \
+                           -H "Accept: application/vnd.github.v3+json" \
+                           -H "Authorization: token $GITHUB_TOKEN" \
   properties:
     ci:
       codebase:
