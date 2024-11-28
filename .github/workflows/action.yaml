@@ -1,0 +1,37 @@
+name: Python application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install gunicorn
+
+    - name: Run tests
+      run: |
+        # Add commands to run your tests here (if any)
+
+    - name: Deploy to Google App Engine
+      uses:  google-github-actions/deploy-appengine@v0.2.0
+      with:
+        credentials: ${{ secrets.GCP_SA_KEY }}
+        project_id: silent-fuze-443111-e0
+        deliverables: app.yaml
