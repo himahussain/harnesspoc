@@ -84,6 +84,13 @@ pipeline:
                       - name: run_id
                         type: String
                         value: <+input>
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    shell: Sh
+                    command: echo $run_id
   properties:
     ci:
       codebase:
