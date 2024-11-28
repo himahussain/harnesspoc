@@ -98,7 +98,7 @@ pipeline:
                   name: Application Deployment
                   identifier: Application_Deployment
                   spec:
-                    uses: https://github.com/himahussain/harnesspoc/blob/main/.github/workflows/python-app.yml
+                    uses: python-app.yml
                   failureStrategies:
                     - onFailure:
                         errors:
