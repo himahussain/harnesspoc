@@ -63,7 +63,7 @@ pipeline:
                       PAYLOAD="{\"ref\":\"$REF\"}"
 
                       # Make the API request to trigger the workflow
-                      $GITHUB_TOKEN" 
+                       
                       curl -L \
                         -X POST \
                         -H "Accept: application/vnd.github+json" \
