@@ -71,25 +71,12 @@ pipeline:
                     defaultBranch: main
                     personalAccount: true
               - step:
-                  type: RegisterCatalog
-                  name: RegisterCatalog_1
-                  identifier: RegisterCatalog_1
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
                   spec:
-                    repository: harnesspoc
-                    filePath: catalog/
-                    branch: main
-                    harnessCodeRepoType: account
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - Timeout
-                        action:
-                          type: ManualIntervention
-                          spec:
-                            onTimeout:
-                              action:
-                                type: Ignore
-                            timeout: 5s
+                    shell: Sh
+                    command: touch new_file_created_by_POC.yaml
         tags: {}
   properties:
     ci:
