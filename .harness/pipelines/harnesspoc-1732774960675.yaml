@@ -26,59 +26,6 @@ pipeline:
             type: Cloud
             spec: {}
     - stage:
-        name: Onboarding
-        identifier: Onboarding
-        description: ""
-        type: IDP
-        spec:
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
-          execution:
-            steps:
-              - step:
-                  type: CreateCatalog
-                  name: CreateCatalog_1
-                  identifier: CreateCatalog_1
-                  spec:
-                    fileName: POC catalog
-                    fileContent: |-
-                      apiVersion: backstage.io/v1alpha1
-                      kind: Component
-                      metadata:
-                        name: <+pipeline.vars.project_name>
-                        description: <+pipeline.vars.description>
-                        annotations:
-                          backstage.io/techdocs-ref: dir:.
-                      spec:
-                        type: service
-                        owner: <+pipeline.vars.owners>
-                        lifecycle: experimental
-              - step:
-                  type: CreateRepo
-                  name: CreateRepo_1
-                  identifier: CreateRepo_1
-                  spec:
-                    connectorType: Github
-                    connectorRef: Guthubtestconnector
-                    organization: himahussain
-                    repository: POCaddition
-                    repoType: public
-                    description: This is the default repo created as part of POC
-                    defaultBranch: main
-                    personalAccount: true
-              - step:
-                  type: Run
-                  name: Run_1
-                  identifier: Run_1
-                  spec:
-                    shell: Sh
-                    command: touch new_file_created_by_POC.yaml
-        tags: {}
-    - stage:
         name: Deployment
         identifier: Deployment
         description: ""
