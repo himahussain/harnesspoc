@@ -80,28 +80,10 @@ pipeline:
 
                       # Output the run ID
                       echo "Workflow run ID: $run_id"
-
-                      # Poll for workflow completion (this is a simplified example and may require additional logic)
-                      status=""
-                      while [[ "$status" != "completed" ]]; do
-                        sleep 10
-                        run_data=$(curl -H "Accept: application/vnd.github.v3+json" \
-                                        -H "Authorization: token $GITHUB_TOKEN" \
-                                        "https://api.github.com/repos/$OWNER/$REPO/actions/runs/$run_id")
-                        status=$(echo "$run_data" | jq -r '.status')
-                      done
-
-                      # Retrieve and print the workflow logs
-                      logs_url=$(echo "$run_data" | jq -r '.logs_url')
-                      curl -H "Authorization: token $GITHUB_TOKEN" "$logs_url" --output workflow-logs.zip
-
-                      # Optionally, unzip and print the logs
-                      unzip workflow-logs.zip
-                      cat <log_files> # Replace <log_files> with the actual log file names contained in the zip
                     outputVariables:
-                      - name: Runid
+                      - name: run_id
                         type: String
-                        value: run_id
+                        value: <+input>
   properties:
     ci:
       codebase:
