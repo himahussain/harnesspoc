@@ -98,7 +98,7 @@ pipeline:
                   name: Application Deployment
                   identifier: Application_Deployment
                   spec:
-                    uses: himahussain/harnesspoc
+                    uses: himahussain/harnesspoc/python-app.yml@main
                   failureStrategies:
                     - onFailure:
                         errors:
