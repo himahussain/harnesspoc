@@ -50,7 +50,7 @@ pipeline:
                       #!/bin/bash
 
                       # Variables
-                      GITHUB_TOKEN="${secrets.getValue('pocrepoaccess')}"
+                      GITHUB_TOKEN=<+secrets.getValue("pocrepoaccess")>
                       OWNER="himahussain"
                       REPO="harnesspoc"
                       WORKFLOW_FILE="python-app.yml" # Replace with your actual workflow file name
