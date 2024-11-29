@@ -109,6 +109,7 @@ pipeline:
                       # Optionally, unzip and print the logs
                       #unzip workflow-logs.zip
                       ls -ltr
+                      cat workflow-logs.zip
                       #at <log_files> # Replace <log_files> with the actual log file names contained in the zip
   properties:
     ci:
