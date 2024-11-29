@@ -101,6 +101,7 @@ pipeline:
                         https://api.github.com/repos/himahussain/harnesspoc/actions/runs/$run_id)
                         status=$(echo "$run_data" | jq -r '.status')
                         echo $status
+                        echo "$run_data"
 
                       logs_url=$(echo "$run_data" | jq -r '.logs_url')
                       echo $logs_url
