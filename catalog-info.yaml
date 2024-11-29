@@ -1,0 +1,27 @@
+apiVersion: backstage.io/v1beta2
+kind: Template
+metadata:
+  name: python-app-template
+  title: Python Application Template
+  description: A template for creating Python applications with GitHub Actions CI/CD.
+  tags:
+    - python
+    - template
+    - github-actions
+spec:
+  type: service
+  owner: team-name # Replace with your team or owner name
+  templater: cookiecutter
+  path: . # Replace with the path to your template directory
+  schema:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+        description: Unique name of the target repository
+      description:
+        type: string
+        description: Description of the repository
