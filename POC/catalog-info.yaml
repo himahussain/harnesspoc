@@ -1,0 +1,40 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  # Unique name for the component
+  name: python-app
+  # Human-readable name for the component
+  title: Python Application
+  # Description of the component
+  description: A Python application with a GitHub Actions CI/CD workflow.
+  # Tags to help categorize and find the component
+  tags:
+    - python
+    - github-actions
+    - app-engine
+  # Annotations to link to external resources
+  annotations:
+    github.com/project-slug: 'himahussain/python-app' # Replace with your GitHub org/repo
+spec:
+  # Type of component, e.g., service, website, library
+  type: service
+  # Lifecycle stage of the component, e.g., experimental, production
+  lifecycle: experimental
+  # Owner of the component, could be a team name or an individual
+  owner: team-name # Replace with your team or owner name
+  # System that the component belongs to (optional)
+  system: optional-system # Replace with your system name or remove if not applicable
+
+  # Additional information about the component (optional)
+  # dependsOn:
+  #   - <dependency-name>
+  # providesApis:
+  #   - <api-name>
+  # consumesApis:
+  #   - <api-name>
+  # partOf:
+  #   - <system-name>
+  # links:
+  #   - url: <link-url>
+  #     title: <link-title>
+  #     icon: <link-icon>
