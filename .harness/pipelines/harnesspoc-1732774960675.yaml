@@ -93,7 +93,7 @@ pipeline:
                     command: |-
                       echo $run_id
                       GITHUB_TOKEN=<+secrets.getValue("pocrepoaccess")>
-                      sleep 10
+                      sleep 180
                       run_data=$(curl -L \
                         -H "Accept: application/vnd.github+json" \
                         -H "Authorization: Bearer $GITHUB_TOKEN" \
