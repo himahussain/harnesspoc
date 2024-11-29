@@ -103,6 +103,7 @@ pipeline:
                         echo $status
 
                       logs_url=$(echo "$run_data" | jq -r '.logs_url')
+                      echo $logs_url
                       curl -H "Authorization: token $GITHUB_TOKEN" "$logs_url" --output workflow-logs.zip
 
                       # Optionally, unzip and print the logs
