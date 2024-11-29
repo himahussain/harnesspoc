@@ -1,0 +1,93 @@
+apiVersion: backstage.io/v1beta2
+kind: Template
+metadata:
+  name: python-app-github-actions
+  title: Python Application GitHub Actions Workflow
+  description: Scaffolds a GitHub repository with a Python application CI/CD workflow.
+spec:
+  owner: team-name # Replace with your team or owner name
+  type: service
+
+  parameters:
+    - title: Fill in the following fields to create your Python application repository
+      required:
+        - name
+        - description
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the target repository
+        description:
+          title: Description
+          type: string
+          description: Description of the repository
+
+  steps:
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:cookiecutter
+      input:
+        url: https://github.com/backstage/backstage-cookiecutter
+        values:
+          name: '{{ parameters.name }}'
+          description: '{{ parameters.description }}'
+
+    - id: github-setup
+      name: Set up GitHub repository
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: '{{ parameters.description }}'
+        repoUrl: 'github.com?owner=your-org&repo={{ parameters.name }}'
+        private: false
+        files:
+          - path: './'
+            content: '{{ steps.fetch-base.output.files }}'
+
+    - id: create-workflow
+      name: Create GitHub Actions workflow
+      action: publish:github:file
+      input:
+        repoUrl: 'github.com?owner=himahussain&repo=harnesspoc
+        file: '.github/workflows/python-app1.yml'
+        content: |
+          name: Python application
+
+          on:
+            workflow_dispatch:
+            workflow_call:
+
+          jobs:
+            build-and-deploy:
+              runs-on: ubuntu-latest
+
+              steps:
+              - uses: actions/checkout@v2
+
+              - name: Set up Python
+                uses: actions/setup-python@v2
+                with:
+                  python-version: '3.9'
+
+              - name: Install dependencies
+                run: |
+                  python -m pip install --upgrade pip
+                  pip install -r requirements.txt
+                  pip install gunicorn
+
+              - name: Run tests
+                run: |
+                  # Add commands to run your tests here (if any)
+
+              - name: Deploy to Google App Engine
+                uses: google-github-actions/deploy-appengine@v0.2.0
+                with:
+                  credentials: ${{ secrets.GCP_SA_KEY }}
+                  project_id: silent-fuze-443111-e0
+                  deliverables: app.yaml
+
+  output:
+    links:
+      - title: Repository
+        url: '{{ steps.github-setup.output.repoUrl }}'
