@@ -94,11 +94,11 @@ pipeline:
                       echo $run_id
                       GITHUB_TOKEN=<+secrets.getValue("pocrepoaccess")>
                       sleep 10
-                      curl -L \
+                      run_data=$(curl -L \
                         -H "Accept: application/vnd.github+json" \
                         -H "Authorization: Bearer $GITHUB_TOKEN" \
                         -H "X-GitHub-Api-Version: 2022-11-28" \
-                        https://api.github.com/repos/himahussain/harnesspoc/actions/runs/$run_id
+                        https://api.github.com/repos/himahussain/harnesspoc/actions/runs/$run_id)
                         status=$(echo "$run_data" | jq -r '.status')
                         echo $status
 
