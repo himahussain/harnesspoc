@@ -108,9 +108,9 @@ pipeline:
                       curl -H "Authorization: token $GITHUB_TOKEN" "$logs_url" --output workflow-logs.zip
 
                       # Optionally, unzip and print the logs
-                      #unzip workflow-logs.zip
+                      unzip workflow-logs.zip
                       ls -ltr
-                      cat workflow-logs.zip
+                      #cat workflow-logs.zip
                       #at <log_files> # Replace <log_files> with the actual log file names contained in the zip
   properties:
     ci:
